@@ -41,8 +41,6 @@ function onSliderGoToNext()
         // Oui, on revient au début (le carrousel est circulaire).
         state.index = 0;
     }
-    //Mise à jour de miniature
-    // updateMiniature();
 
     // Mise à jour de l'affichage.
     refreshSlider();
@@ -70,59 +68,8 @@ function updateMiniature() {
     // Log the index of the selected element
     console.log("Index of the selected element:", state.index);
     
-
-
-    // Function to create and append img elements
-    // function createImages() {
-    //     // for (var i = state.index; i <= 5; i++) {
-            
-    //     // Get the span element
-    //     var span = document.getElementById('span');
-    //     var img = document.createElement('img');
-    //         img.className = 'min';
-    //         img.src = slides[state.index].image;
-    //         img.alt = 'Thumbnail ' + state.index;
-    //         if (state.index> 4) {
-                
-    //             span.appendChild(img);
-    //             span.removeChild(span.children[0])
-    //         }
-    //         if (state.index <0) {
-    //             span.insertBefore( 
-    //                 img, span.firstChild); 
-    //             span.removeChild(span.lastChild);
-    //         }
-    //     // }
-    // }
-
-    // // Call the function to create the initial set of images
-    // createImages();
-
-    // Function to update the images
-   
-    // updateImages();
     
 }
-//  function updateImages() {
-//         var images = document.querySelectorAll('span.thumbnails img');
-//         images.forEach(function(img, index) {
-//             img.src = slides[index+1].image; 
-//         });
-// }
-
-
-// Function to create and append img elements
-// function getAndDisplayImages() {
-//         var span = document.getElementById('span');
-//         for (var i = 1; i <= slides.length; i++) {
-//         // Get the span element
-//         var img = document.createElement('img');
-//             img.className = 'min';
-//             img.src = slides[i].image;
-//             img.alt = 'Thumbnail ' + (i+1);
-//             span.appendChild(img);
-//         }
-// }
 
 function disable_button() {
     // currentIndex = (state.index + 1) % slides.length;
@@ -153,9 +100,6 @@ function onSliderGoToPrevious()
         // Oui, on revient à la fin (le carrousel est circulaire).
         state.index = slides.length - 1;
     }
-
-    //Mise à jour de miniature
-    // updateMiniature();
 
     // Mise à jour de l'affichage.
     refreshSlider();
@@ -295,9 +239,16 @@ function refreshSlider()
 {
     var sliderImage;
     // var sliderLegend;
-
+    
     // Recherche des balises de contenu du carrousel.
     sliderImage  = document.querySelector('#slider img');
+    // sliderImage.classList.toggle('show-img');
+    // sliderImage.classList.toggle('hide-img');
+    sliderImage.classList.add('animate'); // Ajoutez la classe "animate" pour déclencher l'animation
+    setInterval(() => {
+        sliderImage.classList.remove('animate');
+    }, 1500);
+    
     // sliderLegend = document.querySelector('#slider figcaption');
 
     // Changement de la source de l'image et du texte de la légende du carrousel.
@@ -308,10 +259,10 @@ function refreshSlider()
     //Mise à jour de miniature
     updateMiniature();
 
-    // updateImages();
-
     // disable_button();
+    // sliderImage.classList.add('show');
 }
+
 
 
 
@@ -357,5 +308,7 @@ document.addEventListener('DOMContentLoaded', function()
 
     // Affichage initial.
     refreshSlider();
-    // getAndDisplayImages();
+    
+
 });
+

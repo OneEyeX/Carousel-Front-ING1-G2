@@ -122,3 +122,90 @@ header {
     border: 4px solid black;
     padding: 2px;
 }
+
+/* added */
+
+/* Animation for the image */
+.slider img.animate {
+    animation: fadeIn 2s;
+    /* Use the fadeIn animation for 1 second */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* trash */
+
+/* Ajoutez ces styles à votre fichier CSS */
+/*
+.slider {
+    /* position: relative; */
+/* width: 100%; */
+/* height: auto; 
+    overflow: hidden;
+}
+*/
+
+.slider img {
+    /* width: 100%; */
+    /* height: auto; */
+    opacity: 1;
+    /* transition: opacity 1.5s ease; */
+    /* animation: moveLeftAndBack 4s ease infinite; */
+    /* Animation duration 4 seconds, ease timing function, infinite loop */
+}
+
+.slider img.hide-img {
+    opacity: .90;
+
+    transition: opacity 1.5s ease;
+}
+
+/* Animation de la nouvelle image qui apparaît */
+.slider img.show-img {
+    opacity: 1;
+
+    transition: opacity 1.5s ease;
+}
+
+
+@keyframes moveLeftAndBack {
+    0% {
+        transform: translateX(0);
+        /* Start at 0px from the left */
+    }
+
+    50% {
+        transform: translateX(-10%);
+
+    }
+
+    100% {
+        transform: translateX(0);
+        /* Go back to the starting position */
+    }
+}
+
+@keyframes moveRightAndBack {
+    0% {
+        transform: translateX(0);
+        /* Start at 0px from the left */
+    }
+
+    50% {
+        transform: translateX(10%);
+
+    }
+
+    100% {
+        transform: translateX(0);
+        /* Go back to the starting position */
+    }
+}

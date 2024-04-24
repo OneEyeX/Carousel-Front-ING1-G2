@@ -267,22 +267,7 @@ function onToolbarToggle()
     icon.classList.toggle('fa-arrow-down');
     icon.classList.toggle('fa-arrow-right');
 
-    /*
-     *  Les deux lignes de code ci-dessus sont équivalentes à :
-     *
-     *
-     *  if(icon.classList.contains('fa-arrow-right') == true)
-     *  {
-     *      icon.classList.remove('fa-arrow-right');
-     *      icon.classList.add('fa-arrow-down');
-     *  }
-     *  else
-     *  {
-     *      icon.classList.add('fa-arrow-right');
-     *      icon.classList.remove('fa-arrow-down');
-     *  }
-     */
-
+    
     // Affiche ou cache la barre d'outils.
     // document.querySelector('.toolbar ul').classList.toggle('hide');
     

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Carrousel</title>
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="css/slider.css">
+
+    <!-- Fonctions utilitaires -->
+    <script src="js/utilities.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Sliders: ahawa l jaw !</h1>
+        <nav class="toolbar">
+            <a id="toolbar-toggle" href="#"><i class="fa fa-arrow-right"></i> Barre d'outils</a>
+            <ul class="hide">
+                <li><button id="slider-previous" title="Image précédente"><i class="fa fa-backward"></i></button></li>
+                <li><button id="slider-toggle" title="Démarrer le carrousel"><i class="fa fa-play"></i></button></li>
+                <li><button id="slider-next" title="Image suivante"><i class="fa fa-forward"></i></button></li>
+                <li><button id="slider-random" title="Sélectionner une image aléatoire"><i class="fa fa-random"></i></button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <figure id="slider" class="slider">
+            <img src="images\1.jpg" alt="Photo du carrousel">
+            <!-- <figcaption></figcaption> -->
+            
+        </figure>
+        <nav class="toolbar">
+            <ul class="bottom-ul">
+                    <li class="bottom-li"><button  id="slider-previous2" ><i class="fa fa-backward"></i> Image précédente</button></li>
+                    <li class="bottom-li">
+                        <span id="span" class="thumbnails">
+                            <img class="min " src="images\1.jpg" alt="Thumbnail 1">
+                            <img class="min" src="images\2.jpg" alt="Thumbnail 2">
+                            <img class="min" src="images\3.jpg" alt="Thumbnail 3">
+                            <img class="min" src="images\4.jpg" alt="Thumbnail 4">
+                            <img class="min" src="images\5.jpg" alt="Thumbnail 5">
+                            <img class="min" src="images\6.jpg" alt="Thumbnail 6">
+                        </span>
+                    </li>
+                    
+                    <li class="bottom-li"><button id="slider-next2" >Image suivante <i class="fa fa-forward"></i></button></li>
+            </ul>
+        </nav>
+    </main>
+
+    <!-- Code principal du carrousel -->
+    <script src="js/slider.js"></script>
+</body>
+</html>

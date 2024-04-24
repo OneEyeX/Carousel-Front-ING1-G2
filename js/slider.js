@@ -296,7 +296,7 @@ function refreshSlider()
 
     // updateImages();
 
-    disable_button();
+    // disable_button();
 }
 
 

@@ -46,7 +46,6 @@ function onSliderGoToNext()
 
     // Mise à jour de l'affichage.
     refreshSlider();
-    // disable_button();
 }
 
 function updateMiniature() {
@@ -146,7 +145,6 @@ function onSliderGoToPrevious()
 
     // Mise à jour de l'affichage.
     refreshSlider();
-    // disable_button();
 }
 
 function onSliderGoToRandom()

@@ -110,6 +110,20 @@ function updateMiniature() {
 //         });
 // }
 
+
+// Function to create and append img elements
+// function getAndDisplayImages() {
+//         var span = document.getElementById('span');
+//         for (var i = 1; i <= slides.length; i++) {
+//         // Get the span element
+//         var img = document.createElement('img');
+//             img.className = 'min';
+//             img.src = slides[i].image;
+//             img.alt = 'Thumbnail ' + (i+1);
+//             span.appendChild(img);
+//         }
+// }
+
 function disable_button() {
     // currentIndex = (state.index + 1) % slides.length;
     // updateImages();
@@ -343,4 +357,5 @@ document.addEventListener('DOMContentLoaded', function()
 
     // Affichage initial.
     refreshSlider();
+    // getAndDisplayImages();
 });

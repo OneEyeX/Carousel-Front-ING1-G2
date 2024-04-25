@@ -301,16 +301,23 @@ function affiche5picture() {
 
 
 function onSliderSaveToggle() {
+    
+    var existingButton = document.getElementById('slider-reset');
+
     var icon = document.getElementById('icona');
-    icon.classList.toggle('fa-refresh');
+    icon.classList.toggle('fa-archive');
     icon.classList.toggle('fa-undo');
+
     if (localStorage.getItem('save')) {
         localStorage.clear();
         state.index =0;
+        existingButton.title = "Sauvegarder la dernière image";
         
     }else{
         localStorage.setItem('save',true);
         save_enabled=true;
+        existingButton.title = "Annuler Sauvegarder la dernière image";
+        
     }
 }
 
@@ -322,7 +329,7 @@ function createBTN() {
         // Update the button's info based on the 'save' key in local storage
         if (!localStorage.getItem('save')) {
             existingButton.title = "Sauvegarder la dernière image";
-            existingButton.innerHTML = '<i id="icona" class="fa fa-refresh"></i>';
+            existingButton.innerHTML = '<i id="icona" class="fa fa-archive"></i>';
         } else {
             existingButton.title = "Annuler Sauvegarder la dernière image";
             existingButton.innerHTML = '<i id="icona"  class="fa fa-undo"></i>';
@@ -334,7 +341,7 @@ function createBTN() {
         // Update the button's info based on the 'save' key in local storage
         if (!localStorage.getItem('save')) {
             button.title = "Sauvegarder la dernière image";
-            button.innerHTML = '<i  id="icona"  class="fa fa-refresh"></i>';
+            button.innerHTML = '<i  id="icona"  class="fa fa-archive"></i>';
         } else {
             button.title = "Annuler Sauvegarder la dernière image";
             button.innerHTML = '<i  id="icona"  class="fa fa-undo"></i>';

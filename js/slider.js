@@ -314,6 +314,41 @@ function onSliderSaveToggle() {
     }
 }
 
+
+function createBTN() {
+    // Check if the button already exists
+    var existingButton = document.getElementById('slider-reset');
+    if (existingButton) {
+        // Update the button's info based on the 'save' key in local storage
+        if (!localStorage.getItem('save')) {
+            existingButton.title = "Sauvegarder la dernière image";
+            existingButton.innerHTML = '<i id="icona" class="fa fa-refresh"></i>';
+        } else {
+            existingButton.title = "Annuler Sauvegarder la dernière image";
+            existingButton.innerHTML = '<i id="icona"  class="fa fa-undo"></i>';
+        }
+    } else {
+        // Create the button element
+        var button = document.createElement('button');
+        button.id = 'slider-reset';
+        // Update the button's info based on the 'save' key in local storage
+        if (!localStorage.getItem('save')) {
+            button.title = "Sauvegarder la dernière image";
+            button.innerHTML = '<i  id="icona"  class="fa fa-refresh"></i>';
+        } else {
+            button.title = "Annuler Sauvegarder la dernière image";
+            button.innerHTML = '<i  id="icona"  class="fa fa-undo"></i>';
+        }
+        // Create the list item element
+        var listItem = document.createElement('li');
+        listItem.appendChild(button);
+
+        // Append the list item to the toolbar
+        var toolbar = document.querySelector('.toolbar ul.hide');
+        toolbar.appendChild(listItem);
+    }
+}
+
 /***********************************************************************************/
 /* ******************************** CODE PRINCIPAL *********************************/
 /***********************************************************************************/
@@ -371,36 +406,3 @@ document.addEventListener('DOMContentLoaded', function()
     
     
 });
-function createBTN() {
-    // Check if the button already exists
-    var existingButton = document.getElementById('slider-reset');
-    if (existingButton) {
-        // Update the button's info based on the 'save' key in local storage
-        if (!localStorage.getItem('save')) {
-            existingButton.title = "Sauvegarder la dernière image";
-            existingButton.innerHTML = '<i id="icona" class="fa fa-refresh"></i>';
-        } else {
-            existingButton.title = "Annuler Sauvegarder la dernière image";
-            existingButton.innerHTML = '<i id="icona"  class="fa fa-undo"></i>';
-        }
-    } else {
-        // Create the button element
-        var button = document.createElement('button');
-        button.id = 'slider-reset';
-        // Update the button's info based on the 'save' key in local storage
-        if (!localStorage.getItem('save')) {
-            button.title = "Sauvegarder la dernière image";
-            button.innerHTML = '<i  id="icona"  class="fa fa-refresh"></i>';
-        } else {
-            button.title = "Annuler Sauvegarder la dernière image";
-            button.innerHTML = '<i  id="icona"  class="fa fa-undo"></i>';
-        }
-        // Create the list item element
-        var listItem = document.createElement('li');
-        listItem.appendChild(button);
-
-        // Append the list item to the toolbar
-        var toolbar = document.querySelector('.toolbar ul.hide');
-        toolbar.appendChild(listItem);
-    }
-}

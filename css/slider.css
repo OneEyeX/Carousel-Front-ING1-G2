@@ -62,6 +62,10 @@ header {
     padding: 1em;
     border-radius: 6px;
     box-shadow: 0 0 8px black;
+    width: 500px;
+    height: 500px;
+    /* height: 40%; */
+    opacity: 1;
 }
 
 .toolbar ul {
@@ -138,82 +142,5 @@ header {
 
     to {
         opacity: 1;
-    }
-}
-
-/* trash */
-
-/* Ajoutez ces styles à votre fichier CSS */
-/*
-.slider {
-    /* position: relative; */
-/* width: 100%; */
-/* height: auto; 
-    overflow: hidden;
-}
-*/
-
-.slider img {
-    /* width: 100%; */
-    /* height: auto; */
-    opacity: 1;
-    /* transition: opacity 1.5s ease; */
-
-}
-
-.slider img.hide-img {
-    opacity: .90;
-
-    transition: opacity 1.5s ease;
-}
-
-/* Animation de la nouvelle image qui apparaît */
-.slider img.show-img {
-    opacity: 1;
-
-    transition: opacity 1.5s ease;
-}
-
-.left {
-    animation: moveLeftAndBack 1s ease;
-    /* Animation duration 4 seconds, ease timing function, infinite loop */
-}
-
-.right {
-    animation: moveRightAndBack 1s ease;
-    /* Animation duration 4 seconds, ease timing function, infinite loop */
-}
-
-@keyframes moveLeftAndBack {
-    0% {
-        transform: translateX(0);
-        /* Start at 0px from the left */
-    }
-
-    50% {
-        transform: translateX(-5%);
-
-    }
-
-    100% {
-        transform: translateX(0);
-        /* Go back to the starting position */
-    }
-}
-
-@keyframes moveRightAndBack {
-    0% {
-        transform: translateX(0);
-        /* Start at 0px from the left */
-    }
-
-    50% {
-        transform: translateX(5%);
-
-    }
-
-    100% {
-        transform: translateX(0);
-        /* Go back to the starting position */
     }
 }

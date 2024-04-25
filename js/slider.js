@@ -13,17 +13,21 @@ const TOUCHE_DROITE = 39;
 // La liste des slides du carrousel.
 var slides =
 [
-    { image: 'images/1.jpg', legend: 'Street Art'          },
-    { image: 'images/2.jpg', legend: 'Fast Lane'           },
-    { image: 'images/3.jpg', legend: 'Colorful Building'   },
-    { image: 'images/4.jpg', legend: 'Skyscrapers'         },
-    { image: 'images/5.jpg', legend: 'City by night'       },
-    { image: 'images/6.jpg', legend: 'Tour Eiffel la nuit' }
+    { image: 'images/1.jpg', legend: '1'          },
+    { image: 'images/2.jpg', legend: '2'           },
+    { image: 'images/3.jpg', legend: '3'   },
+    { image: 'images/4.jpg', legend: '4'         },
+    { image: 'images/5.jpg', legend: '5'       },
+    { image: 'images/6.jpg', legend: '6' },
+    { image: 'images/7.jpg', legend: '7' },
+    { image: 'images/8.jpg', legend: '8' },
+    { image: 'images/9.jpg', legend: '9' },
+    { image: 'images/10.jpg', legend: '10' }
 ];
 
 // Objet contenant l'état du carrousel.
 var state;
-
+var save_enabled;
 
 
 /***********************************************************************************/
@@ -42,12 +46,6 @@ function onSliderGoToNext()
         state.index = 0;
     }
 
-    // var sliderImage;
-    // sliderImage  = document.querySelector('#slider img');
-    // sliderImage.classList.add('right'); // Ajoutez la classe "animate" pour déclencher l'animation
-    // setInterval(() => {
-    //     sliderImage.classList.remove('right');
-    // }, 2000);
 
     // Mise à jour de l'affichage.
     refreshSlider();
@@ -73,7 +71,7 @@ function updateMiniature() {
             break;
         }
     }
-    images[state.index].classList.toggle('selected');
+    images[selectedIndex].classList.toggle('selected');
     // Log the index of the selected element
     console.log("Index of the selected element:", state.index);
     
@@ -81,9 +79,7 @@ function updateMiniature() {
 }
 
 function disable_button() {
-    // currentIndex = (state.index + 1) % slides.length;
-    // updateImages();
-
+    
     // Disable next button if max is reached
     if (state.index === slides.length - 1) {
         document.getElementById('slider-next2').disabled = true;
@@ -109,14 +105,7 @@ function onSliderGoToPrevious()
         // Oui, on revient à la fin (le carrousel est circulaire).
         state.index = slides.length - 1;
     }
-    // var sliderImage;
-    // sliderImage  = document.querySelector('#slider img');
-    // sliderImage.classList.add('left'); // Ajoutez la classe "animate" pour déclencher l'animation
-    // setInterval(() => {
-    //     sliderImage.classList.remove('left');
-    // }, 2000);
 
-    
     // Mise à jour de l'affichage.
     refreshSlider();
     
@@ -260,58 +249,70 @@ function refreshSlider()
     
     // Recherche des balises de contenu du carrousel.
     sliderImage  = document.querySelector('#slider img');
-    // sliderImage.classList.toggle('show-img');
-    // sliderImage.classList.toggle('hide-img');
-    sliderImage.classList.add('animate'); // Ajoutez la classe "animate" pour déclencher l'animation
-    // if (dir===0) {
-        
-    //     sliderImage.classList.add('right');
-    //     // alert('hello');
-    // }
-    // if (dir===1) {
-        
-    //     sliderImage.classList.add('left');
-    // }
+   sliderImage.classList.add('animate'); // Ajoutez la classe "animate" pour déclencher l'animation
     
-    setInterval(() => {
+    window.setInterval(() => {
         sliderImage.classList.remove('animate');
-        // sliderImage.classList.remove('right');
-        // sliderImage.classList.remove('left');
-    }, 1500);
+        
+    }, 2000);
 
     // sliderLegend = document.querySelector('#slider figcaption');
 
     // Changement de la source de l'image et du texte de la légende du carrousel.
     sliderImage.src          = slides[state.index].image;
     // sliderLegend.textContent = slides[state.index].legend;
-
+    if (save_enabled) {
+        localStorage.setItem('lastImageId', state.index);
+    }
+    
     
     //Mise à jour de miniature
-    updateMiniature();
+    // updateMiniature();
+    affiche5picture();
 
     // disable_button();
-    // sliderImage.classList.add('show');
+    
+    
+}
 
-    // var element = $("#span");
+function affiche5picture() {
     var parentElement = document.getElementById("span");
-    parentElement.childNodes.forEach(element => {
-        parentElement.removeChild(element);
-    });
-    var txt="";
-    for (let index = 0; index < slides.length; index++) {
-        txt=txt+' <img class="min ';
-        if (index===state.index) {
-            txt=txt+' selected" ';
-        }
-        txt=txt+'" src="'+slides[index].image+'" alt="Thumbnail '+(index+1)+'"> ';
-        console.log(txt);
-        
+
+    // Remove all child nodes from parentElement
+    while (parentElement.firstChild) {
+        parentElement.removeChild(parentElement.firstChild);
     }
-    parentElement.innerHTML=txt
+    
+    var txt = "";
+    
+    for (let index = state.index; index < state.index + 5; index++) {
+        // Ensure the index is within the bounds of the slides array
+        var slideIndex = index % slides.length;
+        
+        txt += '<img class="min';
+        if (index === state.index) {
+            txt += ' selected';
+        }
+        txt += '" src="' + slides[slideIndex].image + '" alt="Thumbnail ' + slides[slideIndex].legend + '"> ';
+    }
+    
+    parentElement.innerHTML = txt;
 }
 
 
-
+function onSliderSaveToggle() {
+    var icon = document.getElementById('icona');
+    icon.classList.toggle('fa-refresh');
+    icon.classList.toggle('fa-undo');
+    if (localStorage.getItem('save')) {
+        localStorage.clear();
+        state.index =0;
+        
+    }else{
+        localStorage.setItem('save',true);
+        save_enabled=true;
+    }
+}
 
 /***********************************************************************************/
 /* ******************************** CODE PRINCIPAL *********************************/
@@ -328,9 +329,20 @@ document.addEventListener('DOMContentLoaded', function()
 {
     // Initialisation du carrousel.
     state       = {};
-    state.index = 0;                   // On commence à la première slide
+    // state.index =  0;                   // On commence à la première slide
     state.timer = null;                // Le carrousel est arrêté au démarrage
-
+    
+    save_enabled=localStorage.getItem('save') || false;
+    if (save_enabled) {
+        state.index = localStorage.getItem('lastImageId')*1 || 0; 
+        
+    }
+    else{
+        state.index =0;
+        localStorage.clear();
+    }                  
+    //
+    createBTN(); 
 
     // Installation des gestionnaires d'évènement.
     installEventHandler('#slider-random', 'click', onSliderGoToRandom);
@@ -342,6 +354,7 @@ document.addEventListener('DOMContentLoaded', function()
     installEventHandler('#slider-previous2', 'click', onSliderGoToPrevious);
     installEventHandler('#slider-next2', 'click', onSliderGoToNext);
     
+    installEventHandler('#slider-reset', 'click', onSliderSaveToggle);
 
     /*
      * L'évènement d'appui sur une touche doit être installé sur l'ensemble de la
@@ -356,6 +369,38 @@ document.addEventListener('DOMContentLoaded', function()
     // Affichage initial.
     refreshSlider();
     
-
+    
 });
+function createBTN() {
+    // Check if the button already exists
+    var existingButton = document.getElementById('slider-reset');
+    if (existingButton) {
+        // Update the button's info based on the 'save' key in local storage
+        if (!localStorage.getItem('save')) {
+            existingButton.title = "Sauvegarder la dernière image";
+            existingButton.innerHTML = '<i id="icona" class="fa fa-refresh"></i>';
+        } else {
+            existingButton.title = "Annuler Sauvegarder la dernière image";
+            existingButton.innerHTML = '<i id="icona"  class="fa fa-undo"></i>';
+        }
+    } else {
+        // Create the button element
+        var button = document.createElement('button');
+        button.id = 'slider-reset';
+        // Update the button's info based on the 'save' key in local storage
+        if (!localStorage.getItem('save')) {
+            button.title = "Sauvegarder la dernière image";
+            button.innerHTML = '<i  id="icona"  class="fa fa-refresh"></i>';
+        } else {
+            button.title = "Annuler Sauvegarder la dernière image";
+            button.innerHTML = '<i  id="icona"  class="fa fa-undo"></i>';
+        }
+        // Create the list item element
+        var listItem = document.createElement('li');
+        listItem.appendChild(button);
 
+        // Append the list item to the toolbar
+        var toolbar = document.querySelector('.toolbar ul.hide');
+        toolbar.appendChild(listItem);
+    }
+}

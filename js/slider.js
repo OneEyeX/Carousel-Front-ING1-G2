@@ -42,8 +42,17 @@ function onSliderGoToNext()
         state.index = 0;
     }
 
+    // var sliderImage;
+    // sliderImage  = document.querySelector('#slider img');
+    // sliderImage.classList.add('right'); // Ajoutez la classe "animate" pour déclencher l'animation
+    // setInterval(() => {
+    //     sliderImage.classList.remove('right');
+    // }, 2000);
+
     // Mise à jour de l'affichage.
     refreshSlider();
+
+    
 }
 
 function updateMiniature() {
@@ -100,9 +109,17 @@ function onSliderGoToPrevious()
         // Oui, on revient à la fin (le carrousel est circulaire).
         state.index = slides.length - 1;
     }
+    // var sliderImage;
+    // sliderImage  = document.querySelector('#slider img');
+    // sliderImage.classList.add('left'); // Ajoutez la classe "animate" pour déclencher l'animation
+    // setInterval(() => {
+    //     sliderImage.classList.remove('left');
+    // }, 2000);
 
+    
     // Mise à jour de l'affichage.
     refreshSlider();
+    
 }
 
 function onSliderGoToRandom()
@@ -235,6 +252,7 @@ function onToolbarToggle()
     
 }
 
+// function refreshSlider(dir=-1)
 function refreshSlider()
 {
     var sliderImage;
@@ -245,10 +263,22 @@ function refreshSlider()
     // sliderImage.classList.toggle('show-img');
     // sliderImage.classList.toggle('hide-img');
     sliderImage.classList.add('animate'); // Ajoutez la classe "animate" pour déclencher l'animation
+    // if (dir===0) {
+        
+    //     sliderImage.classList.add('right');
+    //     // alert('hello');
+    // }
+    // if (dir===1) {
+        
+    //     sliderImage.classList.add('left');
+    // }
+    
     setInterval(() => {
         sliderImage.classList.remove('animate');
+        // sliderImage.classList.remove('right');
+        // sliderImage.classList.remove('left');
     }, 1500);
-    
+
     // sliderLegend = document.querySelector('#slider figcaption');
 
     // Changement de la source de l'image et du texte de la légende du carrousel.
@@ -261,6 +291,23 @@ function refreshSlider()
 
     // disable_button();
     // sliderImage.classList.add('show');
+
+    // var element = $("#span");
+    var parentElement = document.getElementById("span");
+    parentElement.childNodes.forEach(element => {
+        parentElement.removeChild(element);
+    });
+    var txt="";
+    for (let index = 0; index < slides.length; index++) {
+        txt=txt+' <img class="min ';
+        if (index===state.index) {
+            txt=txt+' selected" ';
+        }
+        txt=txt+'" src="'+slides[index].image+'" alt="Thumbnail '+(index+1)+'"> ';
+        console.log(txt);
+        
+    }
+    parentElement.innerHTML=txt
 }
 
 

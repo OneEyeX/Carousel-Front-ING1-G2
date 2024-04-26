@@ -18,4 +18,5 @@ function installEventHandler(selector, type, eventHandler)
 
     // Installation d'un gestionnaire d'évènement sur cet objet DOM.
     domObject.addEventListener(type, eventHandler);
+    return domObject;
 }

@@ -397,7 +397,17 @@ document.addEventListener('DOMContentLoaded', function()
     installEventHandler('#slider-next2', 'click', onSliderGoToNext);
     
     installEventHandler('#slider-reset', 'click', onSliderSaveToggle);
-
+    
+    
+    installEventHandler('#displayed', 'mouseup', function(event) {
+        // var imageElement=document.querySelector('#displayed');
+        if (event.clientX < this.offsetLeft + this.offsetWidth / 2) {
+            onSliderGoToPrevious();
+        } else {
+            onSliderGoToNext();
+        }
+    });
+    
     /*
      * L'évènement d'appui sur une touche doit être installé sur l'ensemble de la
      * page, on ne recherche pas une balise en particulier dans l'arbre DOM.

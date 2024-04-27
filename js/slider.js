@@ -310,11 +310,12 @@ function onSliderSaveToggle() {
 
     if (localStorage.getItem('save')) {
         localStorage.clear();
-        state.index =0;
+        // state.index =0;
         existingButton.title = "Sauvegarder la dernière image";
         
     }else{
         localStorage.setItem('save',true);
+        localStorage.setItem('lastImageId', state.index);
         save_enabled=true;
         existingButton.title = "Annuler Sauvegarder la dernière image";
         

@@ -268,16 +268,16 @@ function refreshSlider()
     
     //Mise à jour de miniature
     // updateMiniature();
-    affiche5picture();
+    afficheNpictures();
 
     // disable_button();
     
     
 }
 
-function affiche5picture() {
+function afficheNpictures(n=5) {
+    n=n*1;
     var parentElement = document.getElementById("span");
-
     // Remove all child nodes from parentElement
     while (parentElement.firstChild) {
         parentElement.removeChild(parentElement.firstChild);
@@ -285,7 +285,7 @@ function affiche5picture() {
     
     var txt = "";
     
-    for (let index = state.index; index < state.index + 5; index++) {
+    for (let index = state.index; index < state.index + n; index++) {
         // Ensure the index is within the bounds of the slides array
         var slideIndex = index % slides.length;
         

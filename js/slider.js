@@ -125,24 +125,8 @@ function onSliderGoToRandom() {
     refreshSlider();
 }
 
-/*
- * Quand on créé un gestionnaire d'évènements, le navigateur appelle la
- * fonction en fournissant un argument event représentant l'évènement lui-même.
- *
- * Si le gestionnaire d'évènements n'a pas besoin de cet argument,
- * inutile de le déclarer !
- *
- * Mais ici on va en avoir besoin...
- */
 function onSliderKeyUp(event) {
-    /*
-     * Les gestionnaires d'évènements d'appui sur une touche (évènements
-     * keydown, keyup, keypress) contiennent une propriété keyCode dans l'objet
-     * event représentant le code de la touche du clavier.
-     *
-     * Il existe de très nombreux codes, plus ou moins standards, voir la page :
-     * https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
-     */
+
 
     switch (event.keyCode) {
         case TOUCHE_DROITE:
@@ -176,16 +160,6 @@ function onSliderToggle() {
         // Non, démarrage du carousel, toutes les deux secondes.
         state.timer = window.setInterval(onSliderGoToNext, 2000);
 
-        /*
-         * Modification du libellé du bouton en mode "OFF".
-         *
-         * La variable spéciale this est automatiquement initialisée par le
-         * navigateur avec l'objet DOM qui a déclenché l'évènement.
-         *
-         * C'est le bouton "Démarrer/Arrêter le carrousel" qui a déclenché
-         * l'évènement, donc la variable spéciale this vaut la même chose
-         * que l'objet renvoyé par document.querySelector('#js-slider-toggle');
-         */
         this.title = 'Arrêter le carrousel';
     }
     else {
@@ -195,16 +169,6 @@ function onSliderToggle() {
         // Réinitialisation de la propriété pour le prochain clic sur le bouton.
         state.timer = null;
 
-        /*
-         * Modification du libellé du bouton en mode "ON".
-         *
-         * La variable spéciale this est automatiquement initialisée par le
-         * navigateur avec l'objet DOM qui a déclenché l'évènement.
-         *
-         * C'est le bouton "Démarrer/Arrêter le carrousel" qui a déclenché
-         * l'évènement, donc la variable spéciale this vaut la même chose
-         * que l'objet renvoyé par document.querySelector('#js-slider-toggle');
-         */
         this.title = 'Démarrer le carrousel';
     }
 }

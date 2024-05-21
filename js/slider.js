@@ -297,7 +297,7 @@ function onSliderSaveToggle() {
     if (localStorage.getItem('save')) {
         localStorage.clear();
         // state.index =0;
-        existingButton.title = "Sauvegarder la dernière image";
+        existingButton.title = "Sauvegarder la dernière image en Local Storage";
 
     } else {
         localStorage.setItem('save', true);
@@ -315,7 +315,7 @@ function createBTN() {
     if (existingButton) {
         // Update the button's info based on the 'save' key in local storage
         if (!localStorage.getItem('save')) {
-            existingButton.title = "Sauvegarder la dernière image";
+            existingButton.title = "Sauvegarder la dernière image en Local Storage";
             existingButton.innerHTML = '<i id="icona" class="fa fa-archive"></i>';
         } else {
             existingButton.title = "Annuler Sauvegarder la dernière image";
@@ -327,7 +327,7 @@ function createBTN() {
         button.id = 'slider-reset';
         // Update the button's info based on the 'save' key in local storage
         if (!localStorage.getItem('save')) {
-            button.title = "Sauvegarder la dernière image";
+            button.title = "Sauvegarder la dernière image en Local Storage";
             button.innerHTML = '<i  id="icona"  class="fa fa-archive"></i>';
         } else {
             button.title = "Annuler Sauvegarder la dernière image";

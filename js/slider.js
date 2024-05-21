@@ -1,4 +1,3 @@
-'use strict';   // Mode strict du JavaScript
 
 /***********************************************************************************/
 /* ********************************* DONNEES CARROUSEL *****************************/
@@ -12,18 +11,18 @@ const TOUCHE_DROITE = 39;
 
 // La liste des slides du carrousel.
 var slides =
-[
-    { image: 'images/1.jpg', legend: '1'          },
-    { image: 'images/2.jpg', legend: '2'           },
-    { image: 'images/3.jpg', legend: '3'   },
-    { image: 'images/4.jpg', legend: '4'         },
-    { image: 'images/5.jpg', legend: '5'       },
-    { image: 'images/6.jpg', legend: '6' },
-    { image: 'images/7.jpg', legend: '7' },
-    { image: 'images/8.jpg', legend: '8' },
-    { image: 'images/9.jpg', legend: '9' },
-    { image: 'images/10.jpg', legend: '10' }
-];
+    [
+        { image: 'images/1.jpg', legend: '1' },
+        { image: 'images/2.jpg', legend: '2' },
+        { image: 'images/3.jpg', legend: '3' },
+        { image: 'images/4.jpg', legend: '4' },
+        { image: 'images/5.jpg', legend: '5' },
+        { image: 'images/6.jpg', legend: '6' },
+        { image: 'images/7.jpg', legend: '7' },
+        { image: 'images/8.jpg', legend: '8' },
+        { image: 'images/9.jpg', legend: '9' },
+        { image: 'images/10.jpg', legend: '10' }
+    ];
 
 // Objet contenant l'état du carrousel.
 var state;
@@ -34,14 +33,12 @@ var save_enabled;
 /* ******************************** FONCTIONS CARROUSEL ****************************/
 /***********************************************************************************/
 
-function onSliderGoToNext()
-{
+function onSliderGoToNext() {
     // Passage à la slide suivante.
     state.index++;
 
     // Est-ce qu'on est arrivé à la fin de la liste des slides ?
-    if(state.index == slides.length)
-    {
+    if (state.index == slides.length) {
         // Oui, on revient au début (le carrousel est circulaire).
         state.index = 0;
     }
@@ -50,7 +47,7 @@ function onSliderGoToNext()
     // Mise à jour de l'affichage.
     refreshSlider();
 
-    
+
 }
 
 function updateMiniature() {
@@ -74,12 +71,12 @@ function updateMiniature() {
     images[selectedIndex].classList.toggle('selected');
     // Log the index of the selected element
     console.log("Index of the selected element:", state.index);
-    
-    
+
+
 }
 
 function disable_button() {
-    
+
     // Disable next button if max is reached
     if (state.index === slides.length - 1) {
         document.getElementById('slider-next2').disabled = true;
@@ -91,39 +88,35 @@ function disable_button() {
     } else {
         document.getElementById("slider-previous2").disabled = false;
     }
-    
-    
+
+
 }
-function onSliderGoToPrevious()
-{
+function onSliderGoToPrevious() {
     // Passage à la slide précédente.
     state.index--;
 
     // Est-ce qu'on est revenu au début de la liste des slides ?
-    if(state.index < 0)
-    {
+    if (state.index < 0) {
         // Oui, on revient à la fin (le carrousel est circulaire).
         state.index = slides.length - 1;
     }
 
     // Mise à jour de l'affichage.
     refreshSlider();
-    
+
 }
 
-function onSliderGoToRandom()
-{
+function onSliderGoToRandom() {
     var index;
 
-    do
-    {
+    do {
         /*
          * Récupération d'un numéro de slide aléatoire différent
          * du numéro de slide actuel.
          */
         index = getRandomInteger(0, slides.length - 1);
     }
-    while(index == state.index);
+    while (index == state.index);
 
     // Passage à une slide aléatoire.
     state.index = index;
@@ -141,8 +134,7 @@ function onSliderGoToRandom()
  *
  * Mais ici on va en avoir besoin...
  */
-function onSliderKeyUp(event)
-{
+function onSliderKeyUp(event) {
     /*
      * Les gestionnaires d'évènements d'appui sur une touche (évènements
      * keydown, keyup, keypress) contiennent une propriété keyCode dans l'objet
@@ -152,27 +144,25 @@ function onSliderKeyUp(event)
      * https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
      */
 
-    switch(event.keyCode)
-    {
+    switch (event.keyCode) {
         case TOUCHE_DROITE:
-        // On passe à la slide suivante.
-        onSliderGoToNext();
-        break;
+            // On passe à la slide suivante.
+            onSliderGoToNext();
+            break;
 
         case TOUCHE_ESPACE:
-        // On démarre ou on arrête le carrousel.
-        onSliderToggle();
-        break;
+            // On démarre ou on arrête le carrousel.
+            onSliderToggle();
+            break;
 
         case TOUCHE_GAUCHE:
-        // On passe à la slide précédente.
-        onSliderGoToPrevious();
-        break;
+            // On passe à la slide précédente.
+            onSliderGoToPrevious();
+            break;
     }
 }
 
-function onSliderToggle()
-{
+function onSliderToggle() {
     var icon;
 
     // Modification de l'icône du bouton pour démarrer ou arrêter le carrousel.
@@ -182,8 +172,7 @@ function onSliderToggle()
     icon.classList.toggle('fa-pause');
 
     // Est-ce que le carousel est démarré ?
-    if(state.timer == null)
-    {
+    if (state.timer == null) {
         // Non, démarrage du carousel, toutes les deux secondes.
         state.timer = window.setInterval(onSliderGoToNext, 2000);
 
@@ -199,8 +188,7 @@ function onSliderToggle()
          */
         this.title = 'Arrêter le carrousel';
     }
-    else
-    {
+    else {
         // Oui, arrêt du carousel.
         window.clearInterval(state.timer);
 
@@ -221,8 +209,7 @@ function onSliderToggle()
     }
 }
 
-function onToolbarToggle()
-{
+function onToolbarToggle() {
     var icon;
 
     // Modification de l'icône du lien pour afficher ou cacher la barre d'outils.
@@ -231,77 +218,76 @@ function onToolbarToggle()
     icon.classList.toggle('fa-arrow-down');
     icon.classList.toggle('fa-arrow-right');
 
-    
+
     // Affiche ou cache la barre d'outils.
     // document.querySelector('.toolbar ul').classList.toggle('hide');
-    
-    document.querySelectorAll('.toolbar ul').forEach(function(ul){
+
+    document.querySelectorAll('.toolbar ul').forEach(function (ul) {
         ul.classList.toggle('hide')
     })
-    
+
 }
 
 // function refreshSlider(dir=-1)
-function refreshSlider()
-{
+function refreshSlider() {
     var sliderImage;
     // var sliderLegend;
-    
+
     // Recherche des balises de contenu du carrousel.
-    sliderImage  = document.querySelector('#slider img');
-   sliderImage.classList.add('animate'); // Ajoutez la classe "animate" pour déclencher l'animation
-    
+    sliderImage = document.querySelector('#slider img');
+    sliderImage.classList.add('animate'); // Ajoutez la classe "animate" pour déclencher l'animation
+
     window.setInterval(() => {
         sliderImage.classList.remove('animate');
-        
+
     }, 2000);
 
     // sliderLegend = document.querySelector('#slider figcaption');
 
     // Changement de la source de l'image et du texte de la légende du carrousel.
-    sliderImage.src          = slides[state.index].image;
+    sliderImage.src = slides[state.index].image;
     // sliderLegend.textContent = slides[state.index].legend;
     if (save_enabled) {
         localStorage.setItem('lastImageId', state.index);
     }
-    
-    
+
+
     //Mise à jour de miniature
     // updateMiniature();
     afficheNpictures();
 
     // disable_button();
-    
-    
+
+
 }
 
-function afficheNpictures(n=5) {
-    n=n*1;
+function afficheNpictures(n = 5) {
+    n = n * 1;
     var parentElement = document.getElementById("span");
     // Remove all child nodes from parentElement
     while (parentElement.firstChild) {
         parentElement.removeChild(parentElement.firstChild);
     }
-    
+
     var txt = "";
-    
+
     for (let index = state.index; index < state.index + n; index++) {
         // Ensure the index is within the bounds of the slides array
         var slideIndex = index % slides.length;
-        
+
         txt += '<img class="min';
         if (index === state.index) {
             txt += ' selected';
         }
         txt += '" src="' + slides[slideIndex].image + '" alt="Thumbnail ' + slides[slideIndex].legend + '"> ';
     }
-    
+
     parentElement.innerHTML = txt;
 }
 
 
 function onSliderSaveToggle() {
-    
+
     var existingButton = document.getElementById('slider-reset');
 
     var icon = document.getElementById('icona');
@@ -312,13 +298,13 @@ function onSliderSaveToggle() {
         localStorage.clear();
         // state.index =0;
         existingButton.title = "Sauvegarder la dernière image";
-        
-    }else{
-        localStorage.setItem('save',true);
+
+    } else {
+        localStorage.setItem('save', true);
         localStorage.setItem('lastImageId', state.index);
-        save_enabled=true;
+        save_enabled = true;
         existingButton.title = "Annuler Sauvegarder la dernière image";
-        
+
     }
 }
 
@@ -361,31 +347,24 @@ function createBTN() {
 /* ******************************** CODE PRINCIPAL *********************************/
 /***********************************************************************************/
 
-/*
- * Installation d'un gestionnaire d'évènement déclenché quand l'arbre DOM sera
- * totalement construit par le navigateur.
- *
- * Le gestionnaire d'évènement est une fonction anonyme que l'on donne en deuxième
- * argument directement à document.addEventListener().
- */
-document.addEventListener('DOMContentLoaded', function()
-{
+
+document.addEventListener('DOMContentLoaded', function () {
     // Initialisation du carrousel.
-    state       = {};
+    state = {};
     // state.index =  0;                   // On commence à la première slide
     state.timer = null;                // Le carrousel est arrêté au démarrage
-    
-    save_enabled=localStorage.getItem('save') || false;
+
+    save_enabled = localStorage.getItem('save') || false;
     if (save_enabled) {
-        state.index = localStorage.getItem('lastImageId')*1 || 0; 
-        
+        state.index = localStorage.getItem('lastImageId') * 1 || 0;
+
     }
-    else{
-        state.index =0;
+    else {
+        state.index = 0;
         localStorage.clear();
-    }                  
+    }
     //
-    createBTN(); 
+    createBTN();
 
     // Installation des gestionnaires d'évènement.
     installEventHandler('#slider-random', 'click', onSliderGoToRandom);
@@ -393,14 +372,14 @@ document.addEventListener('DOMContentLoaded', function()
     installEventHandler('#slider-next', 'click', onSliderGoToNext);
     installEventHandler('#slider-toggle', 'click', onSliderToggle);
     installEventHandler('#toolbar-toggle', 'click', onToolbarToggle);
-    
+
     installEventHandler('#slider-previous2', 'click', onSliderGoToPrevious);
     installEventHandler('#slider-next2', 'click', onSliderGoToNext);
-    
+
     installEventHandler('#slider-reset', 'click', onSliderSaveToggle);
-    
-    
-    installEventHandler('#displayed', 'mouseup', function(event) {
+
+
+    installEventHandler('#displayed', 'mouseup', function (event) {
         // var imageElement=document.querySelector('#displayed');
         if (event.clientX < this.offsetLeft + this.offsetWidth / 2) {
             onSliderGoToPrevious();
@@ -408,19 +387,13 @@ document.addEventListener('DOMContentLoaded', function()
             onSliderGoToNext();
         }
     });
-    
-    /*
-     * L'évènement d'appui sur une touche doit être installé sur l'ensemble de la
-     * page, on ne recherche pas une balise en particulier dans l'arbre DOM.
-     *
-     * L'ensemble de la page c'est la balise <html> et donc la variable document.
-     */
+
     document.addEventListener('keyup', onSliderKeyUp);
     // Equivalent à installEventHandler('html', 'keyup', onSliderKeyUp);
 
 
     // Affichage initial.
     refreshSlider();
-    
-    
+
+
 });

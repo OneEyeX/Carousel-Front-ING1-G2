@@ -2,6 +2,16 @@
     box-sizing: border-box;
 }
 
+body {
+    /* structure */
+    margin: 0 auto;
+    overflow-y: scroll;
+    width: 80%;
+
+    /* presentation */
+    background: url('../images/BG.png') repeat;
+}
+
 a {
     color: #2A8782;
     text-decoration: none;
@@ -12,15 +22,6 @@ a:hover {
     text-shadow: 0 0 4px grey;
 }
 
-body {
-    /* structure */
-    margin: 0 auto;
-    overflow-y: scroll;
-    width: 80%;
-
-    /* presentation */
-    background: url('../images/BG.png') repeat;
-}
 
 body,
 button {
@@ -44,10 +45,7 @@ header {
 .slider {
     -webkit-backface-visibility: hidden;
     /* obligatoire pour éviter l'effet de crénelage sous Chrome */
-
-    /* text-align: center; */
     transform: rotate(-5deg);
-    /* transform-origin: 50% 50%; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -111,8 +109,6 @@ header {
 
 }
 
-
-
 .min {
     width: 120px;
     height: 100px;
@@ -134,12 +130,11 @@ header {
     padding: 2px;
 }
 
-/* added */
 
-/* Animation for the image */
+/* Animation for the SLIDE image */
 .slider img.animate {
     animation: fadeIn 2s ease-in-out;
-    /* Use the fadeIn animation for 1 second */
+    /* Use the fadeIn animation for 2 second */
 }
 
 @keyframes fadeIn {

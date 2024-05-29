@@ -61,6 +61,13 @@ header {
     opacity: 1;
 }
 
+#legend {
+    color: #2A8782;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow: 0 0 3px grey;
+}
+
 .toolbar ul {
     padding-left: 0;
     list-style-type: none;

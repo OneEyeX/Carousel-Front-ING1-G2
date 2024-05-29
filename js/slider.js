@@ -16,16 +16,16 @@ var save_enabled;
 // La liste des slides du carrousel.
 var slides =
     [
-        { image: 'images/1.jpg', Id: '1' },
-        { image: 'images/2.jpg', Id: '2' },
-        { image: 'images/3.jpg', Id: '3' },
-        { image: 'images/4.jpg', Id: '4' },
-        { image: 'images/5.jpg', Id: '5' },
-        { image: 'images/6.jpg', Id: '6' },
-        { image: 'images/7.jpg', Id: '7' },
-        { image: 'images/8.jpg', Id: '8' },
-        { image: 'images/9.jpg', Id: '9' },
-        { image: 'images/10.jpg', Id: '10' }
+        { image: 'images/1.jpg', Id: '1', legend: 'Image 1' },
+        { image: 'images/2.jpg', Id: '2', legend: 'Image 2' },
+        { image: 'images/3.jpg', Id: '3', legend: 'Image 3' },
+        { image: 'images/4.jpg', Id: '4', legend: 'Image 4' },
+        { image: 'images/5.jpg', Id: '5', legend: 'Image 5' },
+        { image: 'images/6.jpg', Id: '6', legend: 'Image 6' },
+        { image: 'images/7.jpg', Id: '7', legend: 'Image 7' },
+        { image: 'images/8.jpg', Id: '8', legend: 'Image 8' },
+        { image: 'images/9.jpg', Id: '9', legend: 'Image 9' },
+        { image: 'images/10.jpg', Id: '1', legend: 'Image 10' }
     ];
 
 
@@ -176,7 +176,7 @@ function refreshSlider() {
 
     // Recherche des balises de contenu du carrousel.
     var sliderImage = document.querySelector('#slider img');
-
+    var sliderLegend = document.querySelector('#legend');
     // Ajoutez la classe "animate" pour déclencher l'animation
     sliderImage.classList.add('animate');
 
@@ -187,6 +187,10 @@ function refreshSlider() {
 
     // Changement de la source de l'image et du texte de la légende du carrousel.
     sliderImage.src = slides[state.index].image;
+    // ajout de legend comme alternative de l'image
+    sliderImage.setAttribute('alt', slides[state.index].legend);
+    // change du contenu du H2 de slider legend
+    sliderLegend.textContent = slides[state.index].legend;
 
     if (save_enabled) {
         localStorage.setItem('lastImageId', state.index);

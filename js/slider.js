@@ -88,6 +88,7 @@ function onSliderGoToRandom() {
 const TOUCHE_GAUCHE = 37;
 const TOUCHE_DROITE = 39;
 const TOUCHE_ESPACE = 32;
+const TOUCHE_S = 83; //pour activer /desactiver auto save
 
 
 /**
@@ -110,6 +111,11 @@ function onSliderKeyUp(event) {
         case TOUCHE_ESPACE:
             // Démarre (ou Arrête) la lecture automatique le carrousel.
             onSliderToggle();
+            break;
+
+        case TOUCHE_S:
+            // Activer/ desactiver auto save.
+            onSliderSaveToggle();
             break;
 
     }
@@ -240,7 +246,7 @@ function getSelectedMininiature(selectedMiniatureIndex) {
  */
 function onSliderSaveToggle() {
 
-    var existingButton = document.getElementById('slider-reset');
+    var autoSaveBtn = document.getElementById('slider-reset');
     var icon = document.getElementById('icona');
     icon.classList.toggle('fa-archive');
     icon.classList.toggle('fa-undo');
@@ -248,21 +254,41 @@ function onSliderSaveToggle() {
     if (localStorage.getItem('save')) {
         localStorage.clear();
         // state.index =0;
-        existingButton.title = "Sauvegarder la dernière image en Local Storage";
+        autoSaveBtn.title = "Sauvegarder la dernière image en Local Storage";
 
     } else {
         localStorage.setItem('save', true);
         localStorage.setItem('lastImageId', state.index);
         save_enabled = true;
-        existingButton.title = "Annuler Sauvegarder la dernière image";
+        autoSaveBtn.title = "Annuler Sauvegarder la dernière image";
 
     }
 }
 
+
+/**
+ * gerer les informations du bouton d autosave (titre et icon)
+ */
+function updateAutoSaveBTN() {
+    // get the button object mel HTML
+    var autoSaveBtn = document.getElementById('slider-reset');
+    if (autoSaveBtn) {
+        // Update the button's info based on the 'save' key in local storage
+        if (!localStorage.getItem('save')) {
+            autoSaveBtn.title = "Sauvegarder la dernière image en Local Storage";
+            autoSaveBtn.innerHTML = '<i id="icona" class="fa fa-archive"></i>';
+        } else {
+            autoSaveBtn.title = "Annuler Sauvegarder la dernière image";
+            autoSaveBtn.innerHTML = '<i id="icona"  class="fa fa-undo"></i>';
+        }
+    }
+}
+
+
+
 /***********************************************************************************/
 /* *********************************** MAIN PROG ***********************************/
 /***********************************************************************************/
-
 
 document.addEventListener('DOMContentLoaded', function () {
     // Initialisation du carrousel.
@@ -313,6 +339,9 @@ document.addEventListener('DOMContentLoaded', function () {
             onSliderGoToNext();
         }
     });
+
+    // update AutoSave Btn infos (icon and title)
+    updateAutoSaveBTN();
 
     // Affichage initial.
     refreshSlider();

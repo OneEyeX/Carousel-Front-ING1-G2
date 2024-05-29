@@ -1,14 +1,13 @@
 * {
     box-sizing: border-box;
+    /* to fit in */
+    font-family: 'Open Sans', sans-serif;
 }
 
 body {
-    /* structure */
     margin: 0 auto;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     width: 80%;
-
-    /* presentation */
     background: url('../images/BG.png') repeat;
 }
 
@@ -23,9 +22,8 @@ a:hover {
 }
 
 
-body,
 button {
-    font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
 }
 
 h1 {
@@ -43,8 +41,6 @@ header {
 }
 
 .slider {
-    -webkit-backface-visibility: hidden;
-    /* obligatoire pour éviter l'effet de crénelage sous Chrome */
     transform: rotate(-5deg);
     display: flex;
     justify-content: center;
@@ -66,10 +62,7 @@ header {
 }
 
 .toolbar ul {
-    /* structure */
     padding-left: 0;
-
-    /* presentation */
     list-style-type: none;
     text-align: center;
 }

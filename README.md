@@ -24,6 +24,6 @@ Ce projet consiste en un carousel d'images interactif développé en HTML, CSS e
 
 Chedly CHAHED
 
-## Licence
+## Lien Version LIVE (Demo)
 
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+[https://oneeyex.github.io/Carousel-Front-ING1-G2/](https://oneeyex.github.io/Carousel-Front-ING1-G2/)

@@ -1,101 +1,56 @@
 
-/***********************************************************************************/
-/* ********************************* DONNEES CARROUSEL *****************************/
-/***********************************************************************************/
-
-// Codes des touches du clavier.
-const TOUCHE_ESPACE = 32;
-const TOUCHE_GAUCHE = 37;
-const TOUCHE_DROITE = 39;
-
-
 // La liste des slides du carrousel.
 var slides =
     [
-        { image: 'images/1.jpg', legend: '1' },
-        { image: 'images/2.jpg', legend: '2' },
-        { image: 'images/3.jpg', legend: '3' },
-        { image: 'images/4.jpg', legend: '4' },
-        { image: 'images/5.jpg', legend: '5' },
-        { image: 'images/6.jpg', legend: '6' },
-        { image: 'images/7.jpg', legend: '7' },
-        { image: 'images/8.jpg', legend: '8' },
-        { image: 'images/9.jpg', legend: '9' },
-        { image: 'images/10.jpg', legend: '10' }
+        { image: 'images/1.jpg', Id: '1' },
+        { image: 'images/2.jpg', Id: '2' },
+        { image: 'images/3.jpg', Id: '3' },
+        { image: 'images/4.jpg', Id: '4' },
+        { image: 'images/5.jpg', Id: '5' },
+        { image: 'images/6.jpg', Id: '6' },
+        { image: 'images/7.jpg', Id: '7' },
+        { image: 'images/8.jpg', Id: '8' },
+        { image: 'images/9.jpg', Id: '9' },
+        { image: 'images/10.jpg', Id: '10' }
     ];
 
 // Objet contenant l'état du carrousel.
 var state;
+// variable de test pour le sauvegarde local
 var save_enabled;
 
 
 /***********************************************************************************/
-/* ******************************** FONCTIONS CARROUSEL ****************************/
+/* ******************************** FUNCTIONS CARROUSEL ****************************/
 /***********************************************************************************/
 
+
+/**
+ * aller au Slide/image suivante
+ */
 function onSliderGoToNext() {
     // Passage à la slide suivante.
     state.index++;
 
-    // Est-ce qu'on est arrivé à la fin de la liste des slides ?
+    // Tester si on est arrivé à la fin de la liste des slides ?
     if (state.index == slides.length) {
         // Oui, on revient au début (le carrousel est circulaire).
         state.index = 0;
     }
 
-
     // Mise à jour de l'affichage.
     refreshSlider();
-
-
 }
 
-function updateMiniature() {
-    // Get all the <img> elements inside the <span>
-    var images = document.querySelectorAll('span.thumbnails img');
 
-    // Initialize a variable to store the index
-    var selectedIndex = 0;
-
-    // Loop through each <img> element
-    for (var i = 0; i < images.length; i++) {
-        // Check if the <img> element contains the class 'selected'
-        if (images[i].classList.contains('selected')) {
-            // If the class is found, store the index and exit the loop
-            selectedIndex = i;
-            images[i].classList.toggle('selected');
-            // createImages();
-            break;
-        }
-    }
-    images[selectedIndex].classList.toggle('selected');
-    // Log the index of the selected element
-    console.log("Index of the selected element:", state.index);
-
-
-}
-
-function disable_button() {
-
-    // Disable next button if max is reached
-    if (state.index === slides.length - 1) {
-        document.getElementById('slider-next2').disabled = true;
-    } else {
-        document.getElementById('slider-next2').disabled = false;
-    }
-    if (state.index <= 0) {
-        document.getElementById("slider-previous2").disabled = true;
-    } else {
-        document.getElementById("slider-previous2").disabled = false;
-    }
-
-
-}
+/**
+ * aller au Slide/image precedente
+ */
 function onSliderGoToPrevious() {
     // Passage à la slide précédente.
     state.index--;
 
-    // Est-ce qu'on est revenu au début de la liste des slides ?
+    // Tester si on est revenu au début de la liste des slides ?
     if (state.index < 0) {
         // Oui, on revient à la fin (le carrousel est circulaire).
         state.index = slides.length - 1;
@@ -103,9 +58,12 @@ function onSliderGoToPrevious() {
 
     // Mise à jour de l'affichage.
     refreshSlider();
-
 }
 
+
+/**
+ * Gerer le choix aleatoire du l'image a affichée dans le carrousel
+ */
 function onSliderGoToRandom() {
     var index;
 
@@ -125,106 +83,121 @@ function onSliderGoToRandom() {
     refreshSlider();
 }
 
+
+// Codes des touches du clavier.
+const TOUCHE_GAUCHE = 37;
+const TOUCHE_DROITE = 39;
+const TOUCHE_ESPACE = 32;
+
+
+/**
+ * Gerer les events/clicks du clavier et agir en fonction du click
+ * 
+ * @param {*} event evenemnt du clavier (pour recuperer le bouton clicked)
+ */
 function onSliderKeyUp(event) {
-
-
     switch (event.keyCode) {
         case TOUCHE_DROITE:
-            // On passe à la slide suivante.
+            // Slide suivante.
             onSliderGoToNext();
             break;
 
+        case TOUCHE_GAUCHE:
+            // Slide précédente.
+            onSliderGoToPrevious();
+            break;
+
         case TOUCHE_ESPACE:
-            // On démarre ou on arrête le carrousel.
+            // Démarre (ou Arrête) la lecture automatique le carrousel.
             onSliderToggle();
             break;
 
-        case TOUCHE_GAUCHE:
-            // On passe à la slide précédente.
-            onSliderGoToPrevious();
-            break;
     }
 }
 
+
+/**
+ * Gerer la lecture automatique du carrousel
+ */
 function onSliderToggle() {
-    var icon;
 
     // Modification de l'icône du bouton pour démarrer ou arrêter le carrousel.
-    icon = document.querySelector('#slider-toggle i');
-
+    var icon = document.querySelector('#slider-toggle i');
     icon.classList.toggle('fa-play');
     icon.classList.toggle('fa-pause');
 
-    // Est-ce que le carousel est démarré ?
+    // tester si le carousel est démarré ?
     if (state.timer == null) {
         // Non, démarrage du carousel, toutes les deux secondes.
-        state.timer = window.setInterval(onSliderGoToNext, 2000);
-
+        state.timer = setInterval(onSliderGoToNext, 2000);
+        // bouton title
         this.title = 'Arrêter le carrousel';
     }
     else {
         // Oui, arrêt du carousel.
-        window.clearInterval(state.timer);
-
-        // Réinitialisation de la propriété pour le prochain clic sur le bouton.
+        clearInterval(state.timer);
         state.timer = null;
-
+        // bouton title
         this.title = 'Démarrer le carrousel';
     }
 }
 
+/**
+ * Gerer le bouton Toolbar(Barre d'outils)
+ */
 function onToolbarToggle() {
-    var icon;
 
     // Modification de l'icône du lien pour afficher ou cacher la barre d'outils.
-    icon = document.querySelector('#toolbar-toggle i');
-
+    var icon = document.querySelector('#toolbar-toggle i');
     icon.classList.toggle('fa-arrow-down');
     icon.classList.toggle('fa-arrow-right');
 
 
-    // Affiche ou cache la barre d'outils.
-    // document.querySelector('.toolbar ul').classList.toggle('hide');
-
+    // Affiche ou cache la barre d'outils et la zone des miniatures.
     document.querySelectorAll('.toolbar ul').forEach(function (ul) {
         ul.classList.toggle('hide')
     })
 
 }
 
-// function refreshSlider(dir=-1)
+
+/**
+ * Gerer l'affichage de l'image au Slider:
+ * refresh, animate w save fel local Storage
+ */
 function refreshSlider() {
-    var sliderImage;
-    // var sliderLegend;
 
     // Recherche des balises de contenu du carrousel.
-    sliderImage = document.querySelector('#slider img');
-    sliderImage.classList.add('animate'); // Ajoutez la classe "animate" pour déclencher l'animation
+    var sliderImage = document.querySelector('#slider img');
 
-    window.setInterval(() => {
+    // Ajoutez la classe "animate" pour déclencher l'animation
+    sliderImage.classList.add('animate');
+
+    setTimeout(() => {
         sliderImage.classList.remove('animate');
-
     }, 2000);
 
-    // sliderLegend = document.querySelector('#slider figcaption');
 
     // Changement de la source de l'image et du texte de la légende du carrousel.
     sliderImage.src = slides[state.index].image;
-    // sliderLegend.textContent = slides[state.index].legend;
+
     if (save_enabled) {
         localStorage.setItem('lastImageId', state.index);
     }
 
-
     //Mise à jour de miniature
-    // updateMiniature();
     afficheNpictures();
-
-    // disable_button();
-
-
 }
 
+
+/**
+ * creer les n miniatures dans le doc 
+ * en commancant de compter de l'index courant (State.index) 
+ * 
+ * jusqu'a (State.index + n)
+ * 
+ * @param {*} n nombre de miniatures a afficher (par defaut n=5) 
+ */
 function afficheNpictures(n = 5) {
     n = n * 1;
     var parentElement = document.getElementById("span");
@@ -239,21 +212,35 @@ function afficheNpictures(n = 5) {
         // Ensure the index is within the bounds of the slides array
         var slideIndex = index % slides.length;
 
-        txt += '<img class="min';
-        if (index === state.index) {
-            txt += ' selected';
-        }
-        txt += '" src="' + slides[slideIndex].image + '" alt="Thumbnail ' + slides[slideIndex].legend + '"> ';
+        txt += `<img id="${slideIndex}" class="min ${index === state.index ? 'selected' : ''}" 
+                src="${slides[slideIndex].image}" alt="Thumbnail  ${slides[slideIndex].Id}" 
+                onclick="getSelectedMininiature(${slideIndex});">`;
     }
 
     parentElement.innerHTML = txt;
 }
 
 
+/**
+ * Affiche la miniature danjs le Slide et refresh 
+ * 
+ * @param {*} selectedMiniatureIndex indice de miniature a affiché dans le Slide
+ */
+function getSelectedMininiature(selectedMiniatureIndex) {
+    // Passage à une slide aléatoire.
+    state.index = selectedMiniatureIndex;
+
+    // Mise à jour de l'affichage.
+    refreshSlider();
+}
+
+
+/**
+ * Activer/Desactiver le sauvegarde locale de ID de la derniere image selectionnée dans local Storage
+ */
 function onSliderSaveToggle() {
 
     var existingButton = document.getElementById('slider-reset');
-
     var icon = document.getElementById('icona');
     icon.classList.toggle('fa-archive');
     icon.classList.toggle('fa-undo');
@@ -272,92 +259,62 @@ function onSliderSaveToggle() {
     }
 }
 
-
-function createBTN() {
-    // Check if the button already exists
-    var existingButton = document.getElementById('slider-reset');
-    if (existingButton) {
-        // Update the button's info based on the 'save' key in local storage
-        if (!localStorage.getItem('save')) {
-            existingButton.title = "Sauvegarder la dernière image en Local Storage";
-            existingButton.innerHTML = '<i id="icona" class="fa fa-archive"></i>';
-        } else {
-            existingButton.title = "Annuler Sauvegarder la dernière image";
-            existingButton.innerHTML = '<i id="icona"  class="fa fa-undo"></i>';
-        }
-    } else {
-        // Create the button element
-        var button = document.createElement('button');
-        button.id = 'slider-reset';
-        // Update the button's info based on the 'save' key in local storage
-        if (!localStorage.getItem('save')) {
-            button.title = "Sauvegarder la dernière image en Local Storage";
-            button.innerHTML = '<i  id="icona"  class="fa fa-archive"></i>';
-        } else {
-            button.title = "Annuler Sauvegarder la dernière image";
-            button.innerHTML = '<i  id="icona"  class="fa fa-undo"></i>';
-        }
-        // Create the list item element
-        var listItem = document.createElement('li');
-        listItem.appendChild(button);
-
-        // Append the list item to the toolbar
-        var toolbar = document.querySelector('.toolbar ul.hide');
-        toolbar.appendChild(listItem);
-    }
-}
-
 /***********************************************************************************/
-/* ******************************** CODE PRINCIPAL *********************************/
+/* *********************************** MAIN PROG ***********************************/
 /***********************************************************************************/
 
 
 document.addEventListener('DOMContentLoaded', function () {
     // Initialisation du carrousel.
     state = {};
-    // state.index =  0;                   // On commence à la première slide
     state.timer = null;                // Le carrousel est arrêté au démarrage
 
+    // recupere la valeur pour tester si le save local est activé
     save_enabled = localStorage.getItem('save') || false;
     if (save_enabled) {
+        // Si activé recupere l'indice du local Storage
         state.index = localStorage.getItem('lastImageId') * 1 || 0;
-
     }
     else {
+        // Sinon (pas activé), initialise l'index avec 0 et netoyyer le localStroage
         state.index = 0;
         localStorage.clear();
     }
-    //
-    createBTN();
 
-    // Installation des gestionnaires d'évènement.
+    // Installation des gestionnaires d'évènement:
+    // sur le doc : pour gerer les touches du clavier 
+    document.addEventListener('keyup', onSliderKeyUp); // Equivalent a installEventHandler('html', 'keyup', onSliderKeyUp);
+
+    // Toolbars
+    installEventHandler('#toolbar-toggle', 'click', onToolbarToggle);
+
+    // menu 
     installEventHandler('#slider-random', 'click', onSliderGoToRandom);
     installEventHandler('#slider-previous', 'click', onSliderGoToPrevious);
     installEventHandler('#slider-next', 'click', onSliderGoToNext);
     installEventHandler('#slider-toggle', 'click', onSliderToggle);
-    installEventHandler('#toolbar-toggle', 'click', onToolbarToggle);
+    installEventHandler('#slider-reset', 'click', onSliderSaveToggle);
 
+    // miniatures
     installEventHandler('#slider-previous2', 'click', onSliderGoToPrevious);
     installEventHandler('#slider-next2', 'click', onSliderGoToNext);
 
-    installEventHandler('#slider-reset', 'click', onSliderSaveToggle);
-
-
+    // button click sur image pour aller au slide suivant(revenir au slide precedent)
     installEventHandler('#displayed', 'mouseup', function (event) {
-        // var imageElement=document.querySelector('#displayed');
-        if (event.clientX < this.offsetLeft + this.offsetWidth / 2) {
+        // recupere les informations sur la taille (width, height) 
+        // et la position (x,y) du image relative au viewport.
+        const click_space = this.getBoundingClientRect();
+        // calcul du moitié de l'image
+        const middle = click_space.left + (click_space.width / 2);
+
+        if (event.clientX < middle) {
             onSliderGoToPrevious();
         } else {
             onSliderGoToNext();
         }
     });
 
-    document.addEventListener('keyup', onSliderKeyUp);
-    // Equivalent à installEventHandler('html', 'keyup', onSliderKeyUp);
-
-
     // Affichage initial.
     refreshSlider();
-
 
 });

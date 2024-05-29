@@ -45,9 +45,13 @@ header {
     -webkit-backface-visibility: hidden;
     /* obligatoire pour éviter l'effet de crénelage sous Chrome */
 
-    text-align: center;
-    transform: rotate(-3deg);
-    transform-origin: 50% 50%;
+    /* text-align: center; */
+    transform: rotate(-5deg);
+    /* transform-origin: 50% 50%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
 }
 
 
@@ -56,9 +60,10 @@ header {
     padding: 1em;
     border-radius: 6px;
     box-shadow: 0 0 8px black;
-    width: 500px;
-    height: 500px;
-    /* height: 40%; */
+    /* width: 550px; */
+    /* height: 550px; */
+    height: 30em;
+    width: 30em;
     opacity: 1;
 }
 
@@ -106,6 +111,8 @@ header {
 
 }
 
+
+
 .min {
     width: 120px;
     height: 100px;
@@ -114,6 +121,12 @@ header {
     border: 1px solid #ddd;
     margin: 5px;
     /* Add some space between thumbnails */
+}
+
+.min:hover {
+    scale: 1.1;
+    border: 4px solid cornflowerblue;
+    cursor: pointer;
 }
 
 .selected {
@@ -125,7 +138,7 @@ header {
 
 /* Animation for the image */
 .slider img.animate {
-    animation: fadeIn 2s;
+    animation: fadeIn 2s ease-in-out;
     /* Use the fadeIn animation for 1 second */
 }
 

@@ -1,3 +1,17 @@
+/***********************************************************************************/
+/* *********************************** Variables ***********************************/
+/***********************************************************************************/
+
+// Codes des touches du clavier.
+const TOUCHE_GAUCHE = 37;
+const TOUCHE_DROITE = 39;
+const TOUCHE_ESPACE = 32;
+const TOUCHE_S = 83; //pour activer /desactiver auto save
+
+// Objet contenant l'état du carrousel.
+var state;
+// variable de test pour le sauvegarde local
+var save_enabled;
 
 // La liste des slides du carrousel.
 var slides =
@@ -14,14 +28,10 @@ var slides =
         { image: 'images/10.jpg', Id: '10' }
     ];
 
-// Objet contenant l'état du carrousel.
-var state;
-// variable de test pour le sauvegarde local
-var save_enabled;
 
 
 /***********************************************************************************/
-/* ******************************** FUNCTIONS CARROUSEL ****************************/
+/* ************************************ FUNCTIONS **********************************/
 /***********************************************************************************/
 
 
@@ -68,10 +78,8 @@ function onSliderGoToRandom() {
     var index;
 
     do {
-        /*
-         * Récupération d'un numéro de slide aléatoire différent
-         * du numéro de slide actuel.
-         */
+        // Récupération d'un numéro de slide aléatoire différent
+        // du numéro de slide actuel.
         index = getRandomInteger(0, slides.length - 1);
     }
     while (index == state.index);
@@ -82,13 +90,6 @@ function onSliderGoToRandom() {
     // Mise à jour de l'affichage.
     refreshSlider();
 }
-
-
-// Codes des touches du clavier.
-const TOUCHE_GAUCHE = 37;
-const TOUCHE_DROITE = 39;
-const TOUCHE_ESPACE = 32;
-const TOUCHE_S = 83; //pour activer /desactiver auto save
 
 
 /**
@@ -123,7 +124,7 @@ function onSliderKeyUp(event) {
 
 
 /**
- * Gerer la lecture automatique du carrousel
+ * Gerer les infos concernant la lecture automatique du carrousel
  */
 function onSliderToggle() {
 
@@ -132,7 +133,7 @@ function onSliderToggle() {
     icon.classList.toggle('fa-play');
     icon.classList.toggle('fa-pause');
 
-    // tester si le carousel est démarré ?
+    // tester si le carousel est démarré
     if (state.timer == null) {
         // Non, démarrage du carousel, toutes les deux secondes.
         state.timer = setInterval(onSliderGoToNext, 2000);

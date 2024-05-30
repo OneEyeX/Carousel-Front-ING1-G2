@@ -80,7 +80,22 @@ function onSliderGoToRandom() {
     do {
         // Récupération d'un numéro de slide aléatoire différent
         // du numéro de slide actuel.
+
         index = getRandomInteger(0, slides.length - 1);
+
+
+        // TASK a faire demandée dans la Validation 
+        // (la fonction getRandomInteger() doit genérer un nombre > index courant 
+        // si l'index courant inferieur a la taille de tableau d'images 
+        // Sinon elle commence de 0 a la taille du tableau)
+        // Code realisé: (supprimer les comments suivantes pour essayer)
+
+        // if (state.index === slides.length - 1) {
+        //     index = getRandomInteger(0, slides.length - 1);
+        // }
+        // else {
+        //     index = getRandomInteger(state.index + 1, slides.length - 1)
+        // }
     }
     while (index == state.index);
 

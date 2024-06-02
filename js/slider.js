@@ -78,11 +78,6 @@ function onSliderGoToRandom() {
     var index;
 
     do {
-        // Récupération d'un numéro de slide aléatoire différent
-        // du numéro de slide actuel.
-
-        index = getRandomInteger(0, slides.length - 1);
-
 
         // TASK a faire demandée dans la Validation 
         // (la fonction getRandomInteger() doit genérer un nombre > index courant 
@@ -90,12 +85,17 @@ function onSliderGoToRandom() {
         // Sinon elle commence de 0 a la taille du tableau)
         // Code realisé: (supprimer les comments suivantes pour essayer)
 
-        // if (state.index === slides.length - 1) {
-        //     index = getRandomInteger(0, slides.length - 1);
-        // }
-        // else {
-        //     index = getRandomInteger(state.index + 1, slides.length - 1)
-        // }
+        if (state.index === slides.length - 1) {
+            index = getRandomInteger(0, slides.length - 1);
+        }
+        else {
+            index = getRandomInteger(state.index + 1, slides.length - 1)
+        }
+
+        // Verion ORIGINALE
+        // Récupération d'un numéro de slide aléatoire différent
+        // du numéro de slide actuel.
+        // index = getRandomInteger(0, slides.length - 1);
     }
     while (index == state.index);
 

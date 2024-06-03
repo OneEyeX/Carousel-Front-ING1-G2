@@ -27,9 +27,6 @@ Ce projet consiste en un carousel d'images interactif développé en HTML, CSS e
  Code réalisé: 
 
 ```js
-/**
- * Gerer le choix aleatoire du l'image a affichée dans le carrousel
- */
 function onSliderGoToRandom() {
     var index;
 

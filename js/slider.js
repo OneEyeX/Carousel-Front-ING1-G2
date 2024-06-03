@@ -85,12 +85,15 @@ function onSliderGoToRandom() {
         // Sinon elle commence de 0 a la taille du tableau)
         // Code realisé: (supprimer les comments suivantes pour essayer)
 
-        if (state.index === slides.length - 1) {
-            index = getRandomInteger(0, slides.length - 1);
-        }
-        else {
-            index = getRandomInteger(state.index + 1, slides.length - 1)
-        }
+        index = state.index === slides.length - 1 ? getRandomInteger(0, slides.length - 1) : getRandomInteger(state.index + 1, slides.length - 1);
+
+        // Equivaut à :
+        // if (state.index === slides.length - 1) {
+        //     index = getRandomInteger(0, slides.length - 1);
+        // }
+        // else {
+        //     index = getRandomInteger(state.index + 1, slides.length - 1)
+        // }
 
         // Verion ORIGINALE
         // Récupération d'un numéro de slide aléatoire différent

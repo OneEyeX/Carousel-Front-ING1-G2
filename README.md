@@ -63,7 +63,9 @@ function onSliderGoToRandom() {
 }
 ```
 
-_Author: [Chedly CHAHED](https://www.linkedin.com/in/chedly-chahed/)_
+## Auteur
+
+_[Chedly CHAHED](https://www.linkedin.com/in/chedly-chahed/)_
 
 ## Lien Version LIVE (Demo)
 

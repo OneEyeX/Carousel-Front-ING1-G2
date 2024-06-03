@@ -1,5 +1,7 @@
 # Carousel d'Images
 
+## Présentation
+
 Ce projet consiste en un carousel d'images interactif développé en HTML, CSS et JavaScript. Le carousel offre plusieurs fonctionnalités, y compris la sauvegarde de l'indice de la dernière image consultée dans le local storage, la navigation en cliquant sur la partie droite ou gauche de l'image, ainsi que les fonctionnalités standard d'un carousel telles que la navigation par les boutons suivant et précédent, la lecture automatique des images et le choix aléatoire d'une image.
 
 ## Fonctionnalités

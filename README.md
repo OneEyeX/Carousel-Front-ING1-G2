@@ -42,6 +42,7 @@ function onSliderGoToRandom() {
         // Code realisé: (supprimer les comments suivantes pour essayer)
 
         index = state.index === slides.length - 1 ? getRandomInteger(0, slides.length - 1) : getRandomInteger(state.index + 1, slides.length - 1);
+        
         // Equivaut à :
         // if (state.index === slides.length - 1) {
         //     index = getRandomInteger(0, slides.length - 1);
